@@ -22,7 +22,11 @@
 
 ###  http://aers.data2semantics.org/vocab/annotation/hasEvidenceSummary
 
-d2sa:hasEvidenceSummary rdf:type owl:ObjectProperty .
+d2sa:hasEvidenceSummary rdf:type owl:ObjectProperty ;
+                        
+                        rdfs:range d2sa:EvidenceSummaryAnnotation ;
+                        
+                        rdfs:domain d2sa:RecommendationAnnotation .
 
 
 
@@ -61,7 +65,11 @@ d2sa:EvidenceAnnotation rdf:type owl:Class ;
 
 d2sa:EvidenceSummaryAnnotation rdf:type owl:Class ;
                                
-                               rdfs:subClassOf d2sa:Annotation .
+                               rdfs:subClassOf d2sa:Annotation ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty swanrel:referencesAsSupportingEvidence ;
+                                                 owl:allValuesFrom d2sa:EvidenceAnnotation
+                                               ] .
 
 
 
@@ -69,7 +77,11 @@ d2sa:EvidenceSummaryAnnotation rdf:type owl:Class ;
 
 d2sa:RecommendationAnnotation rdf:type owl:Class ;
                               
-                              rdfs:subClassOf d2sa:Annotation .
+                              rdfs:subClassOf d2sa:Annotation ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty d2sa:hasEvidenceSummary ;
+                                                owl:allValuesFrom d2sa:EvidenceSummaryAnnotation
+                                              ] .
 
 
 
